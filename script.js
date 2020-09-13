@@ -68,7 +68,7 @@ $(document).ready(function () {
 
       console.log("Current Weather Logo:" + CurrLogo);
 
-      $("currWeatherLogo").text("http://openweathermap.org/img/wn/" + CurrLogo + "@2x.png");
+      $("#currWeatherLogo").attr("src", "http://openweathermap.org/img/wn/" + CurrLogo + "@2x.png");
 
       //TEMPERATURE CONVERTED TO FARENHEIT 
 
@@ -120,7 +120,7 @@ $(document).ready(function () {
 
       console.log("Day One Icon:" + dayOneIcon);
 
-      $("#dayOneIcon").text(dayOneIcon);
+      $("#dayOneIcon").attr("src", "http://openweathermap.org/img/wn/" + dayOneIcon + "@2x.png");
 
       var dayOneTempK = forecastData.list[3].main.temp;
 
@@ -148,7 +148,7 @@ $(document).ready(function () {
 
       console.log("Day Two Icon:" + dayTwoIcon);
 
-      $("#dayTwoIcon").text(dayTwoIcon);
+      $("#dayTwoIcon").attr("src", "http://openweathermap.org/img/wn/" + dayTwoIcon + "@2x.png");
 
       var dayTwoTempK = forecastData.list[11].main.temp;
 
@@ -176,7 +176,7 @@ $(document).ready(function () {
 
       console.log("Day Three Icon:" + dayThreeIcon);
       
-      $("#dayThreeIcon").text(dayThreeIcon);
+      $("#dayThreeIcon").attr("src", "http://openweathermap.org/img/wn/" + dayThreeIcon + "@2x.png");
 
       var dayThreeTempK = forecastData.list[19].main.temp;
 
@@ -204,7 +204,7 @@ $(document).ready(function () {
 
       console.log("Day Four Icon:" + dayFourIcon);
       
-      $("#dayFourIcon").text(dayFourIcon);
+      $("#dayFourIcon").attr("src", "http://openweathermap.org/img/wn/" + dayFourIcon + "@2x.png");
 
       var dayFourTempK = forecastData.list[27].main.temp;
 
@@ -232,7 +232,7 @@ $(document).ready(function () {
 
       console.log("Day Five Icon:" + dayFiveIcon);
       
-      $("#dayFiveIcon").text(dayFiveIcon);
+      $("#dayFiveIcon").attr("src", "http://openweathermap.org/img/wn/" + dayFiveIcon + "@2x.png");
 
       var dayFiveTempK = forecastData.list[35].main.temp;
 
