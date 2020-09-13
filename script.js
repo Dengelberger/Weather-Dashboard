@@ -1,198 +1,255 @@
 //WE ARE USING JQUERY.
-    $(document).ready(function () {
+$(document).ready(function () {
 
-      //BRINGS IN THE CURRENT DATE - THIS PART IS COMPLETE
+  //BRINGS IN THE CURRENT DATE - THIS PART IS COMPLETE
 
-    var date = $("#currDate");
+  var date = $("#currDate");
 
-    currDateEl = moment().format("MM/DD/YY");
-    console.log(currDateEl);
-    date.text("(" + currDateEl + ")");
- 
-    // MY API KEY - THIS PART IS COMPLETE
- 
-    var APIKey = "815cefae75b45f52456c8ed196bcea7f";
+  currDateEl = moment().format("MM/DD/YY");
+  console.log(currDateEl);
+  date.text("(" + currDateEl + ")");
 
-    // A VARIABLE TO CAPTURE THE CITY NAME THAT IS INPUT.  I HAVE TO FIX THIS PART
+  // MY API KEY - THIS PART IS COMPLETE
+
+  var APIKey = "815cefae75b45f52456c8ed196bcea7f";
+
+  // A VARIABLE TO CAPTURE THE CITY NAME THAT IS INPUT.  I HAVE TO FIX THIS PART
 
   var cityName = document.querySelector("#searchBox").val;
 
-// $(document).on('click', "#searchBox", function (event) {
-//   event.preventDefault();
-//   inputEl = $(this);
-//   var cityName = $(this).text;
-//   localStorage.setItem(cityName, inputEl.text);
-// })
+  // $(document).on('click', "#searchBox", function (event) {
+  //   event.preventDefault();
+  //   inputEl = $(this);
+  //   var cityName = $(this).text;
+  //   localStorage.setItem(cityName, inputEl.text);
+  // })
 
-    console.log(cityName);
+  console.log(cityName);
 
-// RETURN THE CITY INPUT INTO THE CURRENT INFORMATION AREA.  I HAVE TO FIX THIS PART.
-  
-    $("#currCityName").text(cityName);
+  // RETURN THE CITY INPUT INTO THE CURRENT INFORMATION AREA.  I HAVE TO FIX THIS PART.
 
-// API QUERY FOR THE FIVE DAY FORECAST - WE NEED THIS FIRST TO GET LATITUDE AND LONGITUDE.  FIX ONCE THE CITY NAME IS FIXED.
+  $("#currCityName").text(cityName);
 
-var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=Miami&appid=" + APIKey;
+  // API QUERY FOR THE FIVE DAY FORECAST - WE NEED THIS FIRST TO GET LATITUDE AND LONGITUDE.  FIX ONCE THE CITY NAME IS FIXED.
 
-// AJAX CALL FOR THE FIVE DAY FORECAST - THIS PART IS COMPLETE
-$.ajax({
+  var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=Miami&appid=" + APIKey;
+
+  // AJAX CALL FOR THE FIVE DAY FORECAST - THIS PART IS COMPLETE
+  $.ajax({
     url: queryURL2,
     method: "GET"
-  }).then(function(forecastData) {
- 
-     console.log(forecastData);
-  
-//CURRENT CITY LATITUDE AND LONGITUDE - THIS PART IS COMPLETE
+  }).then(function (forecastData) {
 
- var currLat = forecastData.city.coord.lat;  
- var currLon = forecastData.city.coord.lon;
+    console.log(forecastData);
 
- // QUERY API FOR THE CURRENT DAY WEATHER - THIS PART IS COMPLETE
+    //CURRENT CITY LATITUDE AND LONGITUDE - THIS PART IS COMPLETE
 
- var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + currLat + "&lon=" + currLon + "&exclude={part}&appid=" + APIKey;
+    var currLat = forecastData.city.coord.lat;
+    var currLon = forecastData.city.coord.lon;
 
-// AJAX CALL FOR THE CURRENT WEATHER - THIS PART IS COMPLETE
+    // QUERY API FOR THE CURRENT DAY WEATHER - THIS PART IS COMPLETE
 
- $.ajax({
-   url: queryURL2,
-   method: "GET"
- }).then(function(weatherData) {
+    var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + currLat + "&lon=" + currLon + "&exclude={part}&appid=" + APIKey;
 
-console.log(weatherData);
+    // AJAX CALL FOR THE CURRENT WEATHER - THIS PART IS COMPLETE
 
-    //ALL OF THESE VARIABLES NEED TO BE ATTACHED TO THEIR PLACES IN THE HTML.
+    $.ajax({
+      url: queryURL2,
+      method: "GET"
+    }).then(function (weatherData) {
 
-    //WEATHER LOGO FOR THE CURRENT WEATHER 
+      console.log(weatherData);
 
-    var CurrLogo = weatherData.current.weather[0].icon;
+      //ALL OF THESE VARIABLES NEED TO BE ATTACHED TO THEIR PLACES IN THE HTML.
 
-    console.log("Current Weather Logo:" + CurrLogo);
+      //WEATHER LOGO FOR THE CURRENT WEATHER 
 
-    $("#currWeatherLogo").text(CurrLogo);
+      var CurrLogo = weatherData.current.weather[0].icon;
 
-    //TEMPERATURE CONVERTED TO FARENHEIT 
+      console.log("Current Weather Logo:" + CurrLogo);
 
-    var KelvinTemp = weatherData.current.temp;
+      $("#currWeatherLogo").text(CurrLogo);
 
-    var FarenTemp = ((KelvinTemp - 273.15) * 1.80 +32).toFixed(2);
+      //TEMPERATURE CONVERTED TO FARENHEIT 
 
-    console.log("Current Temperature:" + FarenTemp);
+      var KelvinTemp = weatherData.current.temp;
 
-    $("#currCityTemp").text("Temperature: " + FarenTemp);
+      var FarenTemp = ((KelvinTemp - 273.15) * 1.80 + 32).toFixed(2);
 
-    //HUMIDITY 
+      console.log("Current Temperature:" + FarenTemp);
 
-    var Humidity = weatherData.current.humidity;
-    
-    console.log("Current Humidity:" + Humidity);
+      $("#currCityTemp").text("Temperature: " + FarenTemp);
 
-    $("#currCityHumidity").text("Humidity: " + Humidity + "%");
+      //HUMIDITY 
 
-    //WIND SPEED 
+      var Humidity = weatherData.current.humidity;
 
-    var windSpeed = weatherData.current.wind_speed;
-    
-    console.log("Current Wind Speed:" + windSpeed);
+      console.log("Current Humidity:" + Humidity);
 
-    $("#currCityWind").text("Wind Speed: " + windSpeed)
+      $("#currCityHumidity").text("Humidity: " + Humidity + "%");
 
-    //UV INDEX
-    
-    var uVIndex = weatherData.current.uvi;
+      //WIND SPEED 
 
-    console.log("Current UV Index: " + uVIndex);
+      var windSpeed = weatherData.current.wind_speed;
 
-    $("#cityUVInd").text("UV Index: " + uVIndex);
+      console.log("Current Wind Speed:" + windSpeed);
 
-    //TO CALL THE CORRECT FIVE DAY FORECAST WE MUST KNOW WHICH ARRAY TO USE. I HAVE CHOSEN THE ARRAYS MATCHING THE NOON FORECAST FOR EACH DAY.
+      $("#currCityWind").text("Wind Speed: " + windSpeed)
 
-    //THESE ALL NEED TO NOW BE ATTACHED TO THEIR PLACES IN THE HTML.
+      //UV INDEX
 
-    //DAY ONE:
-    var dayOneDate = currDateEl + 24;
+      var uVIndex = weatherData.current.uvi;
 
-    $("#dayOneDate").text(dayOneDate);
+      console.log("Current UV Index: " + uVIndex);
 
-    var dayOneIcon = forecastData.list[3].weather[0].icon;
-    
-    console.log("Day One Icon:" + dayOneIcon);
+      $("#cityUVInd").text("UV Index: " + uVIndex);
 
-    $("#dayOneIcon").text(dayOneIcon);
+      //TO CALL THE CORRECT FIVE DAY FORECAST WE MUST KNOW WHICH ARRAY TO USE. I HAVE CHOSEN THE ARRAYS MATCHING THE NOON FORECAST FOR EACH DAY.
 
-    var dayOneTempK = forecastData.list[3].main.temp;
-    
-    var dayOneTemp = ((dayOneTempK - 273.15) * 1.80 +32).toFixed(2);
+      //THESE ALL NEED TO NOW BE ATTACHED TO THEIR PLACES IN THE HTML.
 
-    console.log("Day One Temp:" + dayOneTemp);
+      //DAY ONE:
 
-    $("#dayOneTemp").text("Temperature: " + dayOneTemp);
+      var dayOneDate = moment().add(1, 'days').format('MM/DD/YY');
 
-    var dayOneHumidity = forecastData.list[3].main.humidity;
+      console.log(dayOneDate);
 
-    console.log("Day One Humidity:" + dayOneHumidity);
+      $("#dayOneDate").text(dayOneDate);
 
-    $("#dayOneHumidity").text("Humditiy: " + dayOneHumidity + "%");
+      var dayOneIcon = forecastData.list[3].weather[0].icon;
 
-  //DAY TWP:
-    
-    var dayTwoIcon = forecastData.list[11].weather[0].icon;
-    
-    console.log("Day Two Icon:" + dayTwoIcon);
+      console.log("Day One Icon:" + dayOneIcon);
 
-    var dayTwoTemp = forecastData.list[11].main.temp;  //THIS NEEDS TO BE CONVERTED TO FARENHEIT
+      $("#dayOneIcon").text(dayOneIcon);
 
-    console.log("Day Two Temp:" + dayTwoTemp);
+      var dayOneTempK = forecastData.list[3].main.temp;
 
-    var dayTwoHumidity = forecastData.list[11].main.humidity;
+      var dayOneTemp = ((dayOneTempK - 273.15) * 1.80 + 32).toFixed(2);
 
-    console.log("Day Two Humidity:" + dayTwoHumidity);
+      console.log("Day One Temp:" + dayOneTemp);
 
-    //DAY THREE:
-    
-    var dayThreeIcon = forecastData.list[19].weather[0].icon;
-    
-    console.log("Day Three Icon:" + dayThreeIcon);
+      $("#dayOneTemp").text("Temperature: " + dayOneTemp);
 
-    var dayThreeTemp = forecastData.list[19].main.temp;  //THIS NEEDS TO BE CONVERTED TO FARENHEIT
+      var dayOneHumidity = forecastData.list[3].main.humidity;
 
-    console.log("Day Three Temp:" + dayThreeTemp);
+      console.log("Day One Humidity:" + dayOneHumidity);
 
-    var dayThreeHumidity = forecastData.list[19].main.humidity;
+      $("#dayOneHumidity").text("Humditiy: " + dayOneHumidity + "%");
 
-    console.log("Day Three Humidity:" + dayThreeHumidity);
+      //DAY TWO:
 
-    //DAY FOUR:
-    
-    var dayFourIcon = forecastData.list[27].weather[0].icon;
-    
-    console.log("Day Four Icon:" + dayFourIcon);
+      var dayTwoDate = moment().add(2, 'days').format('MM/DD/YY');
 
-    var dayFourTemp = forecastData.list[27].main.temp;  //THIS NEEDS TO BE CONVERTED TO FARENHEIT
+      console.log(dayTwoDate);
 
-    console.log("Day Four Temp:" + dayFourTemp);
+      $("#dayTwoDate").text(dayTwoDate);
 
-    var dayFourHumidity = forecastData.list[27].main.humidity;
+      var dayTwoIcon = forecastData.list[11].weather[0].icon;
 
-    console.log("Day Four Humidity:" + dayFourHumidity);
+      console.log("Day Two Icon:" + dayTwoIcon);
 
-    //DAY FIVE:
-    
-    var dayFiveIcon = forecastData.list[35].weather[0].icon;
-    
-    console.log("Day Five Icon:" + dayFiveIcon);
+      $("#dayTwoIcon").text(dayTwoIcon);
 
-    var dayFiveTemp = forecastData.list[35].main.temp;  //THIS NEEDS TO BE CONVERTED TO FARENHEIT
+      var dayTwoTempK = forecastData.list[11].main.temp;
 
-    console.log("Day Five Temp:" + dayFiveTemp);
+      var dayTwoTemp = ((dayTwoTempK - 273.15) * 1.80 + 32).toFixed(2);
 
-    var dayFiveHumidity = forecastData.list[35].main.humidity;
+      console.log("Day Two Temp:" + dayTwoTemp);
 
-    console.log("Day Five Humidity:" + dayFiveHumidity);
+      $("#dayTwoTemp").text("Temperature: " + dayTwoTemp);
+
+      var dayTwoHumidity = forecastData.list[11].main.humidity;
+
+      console.log("Day Two Humidity:" + dayTwoHumidity);
+
+      $("#dayTwoHumidity").text("Humditiy: " + dayTwoHumidity + "%");
+
+      //DAY THREE:
+
+      var dayThreeDate = moment().add(3, 'days').format('MM/DD/YY');
+
+      console.log(dayThreeDate);
+
+      $("#dayThreeDate").text(dayThreeDate);
+
+      var dayThreeIcon = forecastData.list[19].weather[0].icon;
+
+      console.log("Day Three Icon:" + dayThreeIcon);
+      
+      $("#dayThreeIcon").text(dayThreeIcon);
+
+      var dayThreeTempK = forecastData.list[19].main.temp;
+
+      var dayThreeTemp = ((dayThreeTempK - 273.15) * 1.80 + 32).toFixed(2);
+
+      console.log("Day Three Temp:" + dayThreeTemp);
+
+      $("#dayThreeTemp").text("Temperature: " + dayThreeTemp);
+
+      var dayThreeHumidity = forecastData.list[19].main.humidity;
+
+      console.log("Day Three Humidity:" + dayThreeHumidity);
+
+      $("#dayThreeHumidity").text("Humditiy: " + dayThreeHumidity + "%");
+
+      //DAY FOUR:
+
+      var dayFourDate = moment().add(4, 'days').format('MM/DD/YY');
+
+      console.log(dayFourDate);
+
+      $("#dayFourDate").text(dayFourDate);
+
+      var dayFourIcon = forecastData.list[27].weather[0].icon;
+
+      console.log("Day Four Icon:" + dayFourIcon);
+      
+      $("#dayFourIcon").text(dayFourIcon);
+
+      var dayFourTempK = forecastData.list[27].main.temp;
+
+      var dayFourTemp = ((dayFourTempK - 273.15) * 1.80 + 32).toFixed(2);
+
+      console.log("Day Four Temp:" + dayFourTemp);
+
+      $("#dayFourTemp").text("Temperature: " + dayFourTemp);
+
+      var dayFourHumidity = forecastData.list[27].main.humidity;
+
+      console.log("Day Four Humidity:" + dayFourHumidity);
+
+      $("#dayFourHumidity").text("Humditiy: " + dayFourHumidity + "%");
+
+      //DAY FIVE:
+
+      var dayFiveDate = moment().add(5, 'days').format('MM/DD/YY');
+
+      console.log(dayFiveDate);
+
+      $("#dayFiveDate").text(dayFiveDate);
+
+      var dayFiveIcon = forecastData.list[35].weather[0].icon;
+
+      console.log("Day Five Icon:" + dayFiveIcon);
+      
+      $("#dayFiveIcon").text(dayFiveIcon);
+
+      var dayFiveTempK = forecastData.list[35].main.temp;
+
+      var dayFiveTemp = ((dayFiveTempK - 273.15) * 1.80 + 32).toFixed(2);
+
+      console.log("Day Five Temp:" + dayFiveTemp);
+
+      $("#dayFiveTemp").text("Temperature: " + dayFiveTemp);
+
+      var dayFiveHumidity = forecastData.list[35].main.humidity;
+
+      console.log("Day Five Humidity:" + dayFiveHumidity);
+
+      $("#dayFiveHumidity").text("Humditiy: " + dayFiveHumidity + "%");
 
 
+    })
+  })
 
-
-})
-})
-
-    });
+});
