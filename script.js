@@ -68,7 +68,7 @@ $(document).ready(function () {
 
       console.log("Current Weather Logo:" + CurrLogo);
 
-      $("#currWeatherLogo").text(CurrLogo);
+      $("currWeatherLogo").text("http://openweathermap.org/img/wn/" + CurrLogo + "@2x.png");
 
       //TEMPERATURE CONVERTED TO FARENHEIT 
 

@@ -54,11 +54,14 @@
 h3 {
     font-size: 24px;
 }
-.card {
+.forecastDate {
+    text-align: center;
+}
+
+.w3-card {
     margin: 10px;
     height: 280px;
     width: 260px;
-    text-align: center;
     font-size: 18px;
     background-color: blue;
     color: white;

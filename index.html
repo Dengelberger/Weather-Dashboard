@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="style.css" />
 </head>
     <h1 id="banner">Weather Dashboard</h1>
@@ -39,7 +40,7 @@
                 <strong><h3 class= "col-sm-12">
                         <span id="currCityName">Current City   </span>
                         <span id="currDate">(Current Date)   </span>
-                        <span id="currWeatherLogo">  Logo</span>
+                        <img src="currWeatherLogo">
                 </h3></strong>
                 <div class = "col-sm-12 current" id="currCityTemp"><span></span></div>
                 <div class = "col-sm-12 current" id="currCityHumidity"><span></span></div>
@@ -52,8 +53,8 @@
                     <strong><h3>5-Day Forecast:</h3></strong>
                 </div>
                 <div class="row" id="forecastByDay">
-                    <div class="card col-sm-2" id="forecastDay1">
-                        <div class="row" id="dayOneDate"></div>
+                    <div class="w3-card col-sm-2" id="forecastDay1">
+                        <div class="w3-container w3-center" id="dayOneDate"></div>
                         <br>
                         <div class="row" id="dayOneIcon"></div>
                         <br>
@@ -61,8 +62,8 @@
                         <br>
                         <div class="row" id="dayOneHumidity"></div>
                     </div>                    
-                    <div class="card col-sm-2" id="forecastDay2">
-                        <div class="row" id="dayTwoDate"></div>
+                    <div class="w3-card col-sm-2" id="forecastDay2">
+                        <div class="w3-container w3-center" id="dayTwoDate"></div>
                         <br>
                         <div class="row" id="dayTwoIcon"></div>
                         <br>
@@ -70,8 +71,8 @@
                         <br>
                         <div class="row" id="dayTwoHumidity"></div>
                     </div>
-                    <div class="card col-sm-2" id="forecastDay3">
-                        <div class="row" id="dayThreeDate"></div>
+                    <div class="w3-card col-sm-2" id="forecastDay3">
+                        <div class="w3-container w3-center" id="dayThreeDate"></div>
                         <br>
                         <div class="row" id="dayThreeIcon"></div>
                         <br>
@@ -79,8 +80,8 @@
                         <br>
                         <div class="row" id="dayThreeHumidity"></div>
                     </div>
-                    <div class="card col-sm-2" id="forecastDay4">
-                        <div class="row" id="dayFourDate"></div>
+                    <div class="w3-card col-sm-2" id="forecastDay4">
+                        <div class="w3-container w3-center" id="dayFourDate"></div>
                         <br>
                         <div class="row" id="dayFourIcon"></div>
                         <br>
@@ -88,8 +89,8 @@
                         <br>
                         <div class="row" id="dayFourHumidity"></div>
                     </div>
-                    <div class="card col-sm-2" id="forecastDay5">
-                        <div class="row" id="dayFiveDate"></div>
+                    <div class="w3-card col-sm-2" id="forecastDay5">
+                        <div class="w3-container w3-center" id="dayFiveDate"></div>
                         <br>
                         <div class="row" id="dayFiveIcon"></div>
                         <br>
