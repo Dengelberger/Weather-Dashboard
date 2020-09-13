@@ -1,0 +1,71 @@
+#banner {
+    background-color: black;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 48px;
+}
+
+.cityHist {
+    border-radius: 12px;
+  background: white;
+  padding: 20px;
+  width: 200px;
+  height: 50px;
+  margin-top: 2px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#searchPrompt {
+  margin-bottom: 20px;
+  padding-left: 40px;
+}
+#searchBtn {
+    background-color: blue;
+    border-radius: 4px;
+    color: white;
+}
+#recentCities {
+    padding-left: 20px;
+    margin-right: 30px;
+}
+#infoArea {
+    padding-left: 20px;
+}
+#cityData {
+    background-color: lightsteelblue;
+    padding-bottom: 24px;
+}
+.current {
+    font-size: 20px;
+}
+#forecast {
+    background-color: lemonchiffon;
+}
+#searchInfo {
+    float: left;
+    background-color: lightcyan;
+}
+#infoArea {
+    float: right;
+}
+h3 {
+    font-size: 24px;
+}
+.card {
+    margin: 10px;
+    height: 280px;
+    width: 260px;
+    text-align: center;
+    font-size: 18px;
+    background-color: blue;
+    color: white;
+    border-radius: 8px;
+
+}
+#forecastByDay {
+    padding-left: 40px;
+    margin-left: 0px;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+    <h1 id="banner">Weather Dashboard</h1>
+<body>
+    <main class= "row">
+        <section class= "col-sm-3" id="searchInfo">          
+            <section class= "row" id="searchPrompt">
+                <h4>Search for a city:</h4>
+                <br>
+                <input class= "col-sm-8" id="searchBox"></input>
+                <button class= "col-sm-3" id="searchBtn">Search</button>
+                <div class = "col-sm-1"></div>
+            </section>
+            <section class = "row" id="recentCities">
+                <button class="cityHist col-sm-12" id="city1"></button>
+                <button class="cityHist col-sm-12" id="city2"></button>
+                <button class="cityHist col-sm-12" id="city3"></button>
+                <button class="cityHist col-sm-12" id="city4"></button>
+                <button class="cityHist col-sm-12" id="city5"></button>
+                <button class="cityHist col-sm-12" id="city6"></button>
+                <button class="cityHist col-sm-12" id="city7"></button>
+                <button class="cityHist col-sm-12" id="city8"></button>
+            </section>     
+        </section>
+        <section class= "col-sm-9" id="infoArea">
+            <section class= "row" id="cityData">
+                <strong><h3 class= "col-sm-12">
+                        <span id="currCityName">Current City   </span>
+                        <span id="currDate">(Current Date)   </span>
+                        <span id="currWeatherLogo">  Logo</span>
+                </h3></strong>
+                <div class = "col-sm-12 current" id="currCityTemp"><span></span></div>
+                <div class = "col-sm-12 current" id="currCityHumidity"><span></span></div>
+                <div class = "col-sm-12 current" id="currCityWind"><span></span></div>
+                <div class = "col-sm-12 current" id="cityUVInd"><span></span>
+                </div>
+            </section>
+            <section class="row" id="forecast">
+                <div class="col-sm-12">
+                    <strong><h3>5-Day Forecast:</h3></strong>
+                </div>
+                <div class="row" id="forecastByDay">
+                    <div class="card col-sm-2" id="forecastDay1">
+                        <div class="row" id="dayOneDate"></div>
+                        <br>
+                        <div class="row" id="dayOneIcon"></div>
+                        <br>
+                        <div class="row" id="dayOneTemp"></div>
+                        <br>
+                        <div class="row" id="dayOneHumidity"></div>
+                    </div>                    
+                    <div class="card col-sm-2" id="forecastDay2">Day 2</div>
+                    <div class="card col-sm-2" id="forecastDay3">Day 3</div>
+                    <div class="card col-sm-2" id="forecastDay4">Day 4</div>
+                    <div class="card col-sm-2" id="forecastDay5">Day 5</div>
+                </div>
+            </section>
+        </section>    
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js" type="text/javascript"></script>
+</body>
+
+</html>
