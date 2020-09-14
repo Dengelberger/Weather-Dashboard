@@ -68,7 +68,38 @@ h3 {
     border-radius: 8px;
 
 }
+
 #forecastByDay {
     padding-left: 40px;
     margin-left: 0px;
+}
+#dayOneTemp {
+    margin-left: 5px;
+}
+#dayOneHumidity {
+    margin-left: 5px;
+}
+#dayTwoTemp {
+    margin-left: 5px;
+}
+#dayTwoHumidity {
+    margin-left: 5px;
+}
+#dayThreeTemp {
+    margin-left: 5px;
+}
+#dayThreeHumidity {
+    margin-left: 5px;
+}
+#dayFourTemp {
+    margin-left: 5px;
+}
+#dayFourHumidity {
+    margin-left: 5px;
+}
+#dayFiveTemp {
+    margin-left: 5px;
+}
+#dayFiveHumidity {
+    margin-left: 5px;
 }

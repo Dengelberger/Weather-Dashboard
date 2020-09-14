@@ -32,7 +32,7 @@ $(document).ready(function () {
 
   // API QUERY FOR THE FIVE DAY FORECAST - WE NEED THIS FIRST TO GET LATITUDE AND LONGITUDE.  FIX ONCE THE CITY NAME IS FIXED.
 
-  var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=Miami&appid=" + APIKey;
+  var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=Philadelphia&appid=" + APIKey;
 
   // AJAX CALL FOR THE FIVE DAY FORECAST - THIS PART IS COMPLETE
   $.ajax({
@@ -60,8 +60,6 @@ $(document).ready(function () {
 
       console.log(weatherData);
 
-      //ALL OF THESE VARIABLES NEED TO BE ATTACHED TO THEIR PLACES IN THE HTML.
-
       //WEATHER LOGO FOR THE CURRENT WEATHER 
 
       var CurrLogo = weatherData.current.weather[0].icon;
@@ -74,7 +72,7 @@ $(document).ready(function () {
 
       var KelvinTemp = weatherData.current.temp;
 
-      var FarenTemp = ((KelvinTemp - 273.15) * 1.80 + 32).toFixed(2);
+      var FarenTemp = ((KelvinTemp - 273.15) * 1.80 + 32).toFixed(0);
 
       console.log("Current Temperature:" + FarenTemp);
 
@@ -98,16 +96,54 @@ $(document).ready(function () {
 
       //UV INDEX
 
-      var uVIndex = weatherData.current.uvi;
+      var uVIndex = parseInt(weatherData.current.uvi);
 
       console.log("Current UV Index: " + uVIndex);
 
       $("#cityUVInd").text("UV Index: " + uVIndex);
 
+      if(uVIndex < 3) {
+        $("#cityUVInd").css('background-color', 'green');
+      } else if(uVIndex < 6) {
+        $("#cityUVInd").css("background-color", 'yellow');
+      } else if(uVIndex < 8) {
+        $("#cityUVInd").css("background-color", 'orange');
+      } else if(uVIndex < 11) {
+        $("#cityUVInd").css("background-color", 'red');
+      }
+      else {
+        $("#cityUVInd").css("background-color", 'purple');
+      }
+
       //TO CALL THE CORRECT FIVE DAY FORECAST WE MUST KNOW WHICH ARRAY TO USE. I HAVE CHOSEN THE ARRAYS MATCHING THE NOON FORECAST FOR EACH DAY.
 
-      //THESE ALL NEED TO NOW BE ATTACHED TO THEIR PLACES IN THE HTML.
+      var hours = parseInt(moment().format("HH"));
 
+      var timeUntil = parseInt((hours - 5));
+
+      if(timeUntil < 5) {
+
+        var dayOneArrayNo = 1 + Math.trunc(Math.abs(timeUntil) / 3);
+
+      } else if(timeUntil <= 7) {
+
+        var dayOneArrayNo = Math.trunc(Math.abs(timeUntil) / 3);
+
+      } 
+
+      var dayOneArrayNo = Math.trunc(8 - (Math.abs(timeUntil) / 3));
+
+      console.log(dayOneArrayNo);
+      
+      var dayTwoArrayNo = parseInt(dayOneArrayNo) + 8;
+
+      var dayThreeArrayNo = parseInt(dayOneArrayNo) + 16;
+
+      var dayFourArrayNo = parseInt(dayOneArrayNo) + 24;
+
+      var dayFiveArrayNo = parseInt(dayOneArrayNo) + 32;
+  
+      
       //DAY ONE:
 
       var dayOneDate = moment().add(1, 'days').format('MM/DD/YY');
@@ -116,21 +152,21 @@ $(document).ready(function () {
 
       $("#dayOneDate").text(dayOneDate);
 
-      var dayOneIcon = forecastData.list[3].weather[0].icon;
+      var dayOneIcon = forecastData.list[dayOneArrayNo].weather[0].icon;
 
       console.log("Day One Icon:" + dayOneIcon);
 
       $("#dayOneIcon").attr("src", "http://openweathermap.org/img/wn/" + dayOneIcon + "@2x.png");
 
-      var dayOneTempK = forecastData.list[3].main.temp;
+      var dayOneTempK = forecastData.list[dayOneArrayNo].main.temp;
 
-      var dayOneTemp = ((dayOneTempK - 273.15) * 1.80 + 32).toFixed(2);
+      var dayOneTemp = ((dayOneTempK - 273.15) * 1.80 + 32).toFixed(0);
 
       console.log("Day One Temp:" + dayOneTemp);
 
-      $("#dayOneTemp").text("Temperature: " + dayOneTemp);
+      $("#dayOneTemp").text("Temp (F): " + dayOneTemp);
 
-      var dayOneHumidity = forecastData.list[3].main.humidity;
+      var dayOneHumidity = forecastData.list[dayOneArrayNo].main.humidity;
 
       console.log("Day One Humidity:" + dayOneHumidity);
 
@@ -144,21 +180,21 @@ $(document).ready(function () {
 
       $("#dayTwoDate").text(dayTwoDate);
 
-      var dayTwoIcon = forecastData.list[11].weather[0].icon;
+      var dayTwoIcon = forecastData.list[dayTwoArrayNo].weather[0].icon;
 
       console.log("Day Two Icon:" + dayTwoIcon);
 
       $("#dayTwoIcon").attr("src", "http://openweathermap.org/img/wn/" + dayTwoIcon + "@2x.png");
 
-      var dayTwoTempK = forecastData.list[11].main.temp;
+      var dayTwoTempK = forecastData.list[dayTwoArrayNo].main.temp;
 
-      var dayTwoTemp = ((dayTwoTempK - 273.15) * 1.80 + 32).toFixed(2);
+      var dayTwoTemp = ((dayTwoTempK - 273.15) * 1.80 + 32).toFixed(0);
 
       console.log("Day Two Temp:" + dayTwoTemp);
 
-      $("#dayTwoTemp").text("Temperature: " + dayTwoTemp);
+      $("#dayTwoTemp").text("Temp (F): " + dayTwoTemp);
 
-      var dayTwoHumidity = forecastData.list[11].main.humidity;
+      var dayTwoHumidity = forecastData.list[dayTwoArrayNo].main.humidity;
 
       console.log("Day Two Humidity:" + dayTwoHumidity);
 
@@ -172,21 +208,21 @@ $(document).ready(function () {
 
       $("#dayThreeDate").text(dayThreeDate);
 
-      var dayThreeIcon = forecastData.list[19].weather[0].icon;
+      var dayThreeIcon = forecastData.list[dayThreeArrayNo].weather[0].icon;
 
       console.log("Day Three Icon:" + dayThreeIcon);
       
       $("#dayThreeIcon").attr("src", "http://openweathermap.org/img/wn/" + dayThreeIcon + "@2x.png");
 
-      var dayThreeTempK = forecastData.list[19].main.temp;
+      var dayThreeTempK = forecastData.list[dayThreeArrayNo].main.temp;
 
-      var dayThreeTemp = ((dayThreeTempK - 273.15) * 1.80 + 32).toFixed(2);
+      var dayThreeTemp = ((dayThreeTempK - 273.15) * 1.80 + 32).toFixed(0);
 
       console.log("Day Three Temp:" + dayThreeTemp);
 
-      $("#dayThreeTemp").text("Temperature: " + dayThreeTemp);
+      $("#dayThreeTemp").text("Temp (F): " + dayThreeTemp);
 
-      var dayThreeHumidity = forecastData.list[19].main.humidity;
+      var dayThreeHumidity = forecastData.list[dayThreeArrayNo].main.humidity;
 
       console.log("Day Three Humidity:" + dayThreeHumidity);
 
@@ -200,21 +236,21 @@ $(document).ready(function () {
 
       $("#dayFourDate").text(dayFourDate);
 
-      var dayFourIcon = forecastData.list[27].weather[0].icon;
+      var dayFourIcon = forecastData.list[dayFourArrayNo].weather[0].icon;
 
       console.log("Day Four Icon:" + dayFourIcon);
       
       $("#dayFourIcon").attr("src", "http://openweathermap.org/img/wn/" + dayFourIcon + "@2x.png");
 
-      var dayFourTempK = forecastData.list[27].main.temp;
+      var dayFourTempK = forecastData.list[dayFourArrayNo].main.temp;
 
-      var dayFourTemp = ((dayFourTempK - 273.15) * 1.80 + 32).toFixed(2);
+      var dayFourTemp = ((dayFourTempK - 273.15) * 1.80 + 32).toFixed(0);
 
       console.log("Day Four Temp:" + dayFourTemp);
 
-      $("#dayFourTemp").text("Temperature: " + dayFourTemp);
+      $("#dayFourTemp").text("Temp (F): " + dayFourTemp);
 
-      var dayFourHumidity = forecastData.list[27].main.humidity;
+      var dayFourHumidity = forecastData.list[dayFourArrayNo].main.humidity;
 
       console.log("Day Four Humidity:" + dayFourHumidity);
 
@@ -228,21 +264,21 @@ $(document).ready(function () {
 
       $("#dayFiveDate").text(dayFiveDate);
 
-      var dayFiveIcon = forecastData.list[35].weather[0].icon;
+      var dayFiveIcon = forecastData.list[dayFiveArrayNo].weather[0].icon;
 
       console.log("Day Five Icon:" + dayFiveIcon);
       
       $("#dayFiveIcon").attr("src", "http://openweathermap.org/img/wn/" + dayFiveIcon + "@2x.png");
 
-      var dayFiveTempK = forecastData.list[35].main.temp;
+      var dayFiveTempK = forecastData.list[dayFiveArrayNo].main.temp;
 
-      var dayFiveTemp = ((dayFiveTempK - 273.15) * 1.80 + 32).toFixed(2);
+      var dayFiveTemp = ((dayFiveTempK - 273.15) * 1.80 + 32).toFixed(0);
 
       console.log("Day Five Temp:" + dayFiveTemp);
 
-      $("#dayFiveTemp").text("Temperature: " + dayFiveTemp);
+      $("#dayFiveTemp").text("Temp (F): " + dayFiveTemp);
 
-      var dayFiveHumidity = forecastData.list[35].main.humidity;
+      var dayFiveHumidity = forecastData.list[dayFiveArrayNo].main.humidity;
 
       console.log("Day Five Humidity:" + dayFiveHumidity);
 
